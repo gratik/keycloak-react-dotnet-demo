@@ -6,6 +6,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
+/// <summary>
+/// Entry point for the KeycloakDemo.ReportingApi application.
+/// Configures services, authentication, and the HTTP request pipeline.
+/// </summary>
+/// <remarks>
+/// This file sets up the ASP.NET Core web application, registers controllers, Swagger, and Keycloak authentication.
+/// </remarks>
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();

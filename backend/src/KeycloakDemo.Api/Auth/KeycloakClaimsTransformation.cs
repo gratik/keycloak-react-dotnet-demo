@@ -4,8 +4,16 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace KeycloakDemo.Api.Auth;
 
+/// <summary>
+/// Transforms Keycloak realm roles into standard ASP.NET role claims for authorization.
+/// </summary>
 public sealed class KeycloakClaimsTransformation : IClaimsTransformation
 {
+    /// <summary>
+    /// Adds Keycloak realm roles as role claims to the principal for ASP.NET authorization.
+    /// </summary>
+    /// <param name="principal">The original ClaimsPrincipal.</param>
+    /// <returns>ClaimsPrincipal with additional role claims if present.</returns>
     public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)
     {
         if (principal.Identity is not ClaimsIdentity identity || !identity.IsAuthenticated)

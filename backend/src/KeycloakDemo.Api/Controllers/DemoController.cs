@@ -8,8 +8,15 @@ namespace KeycloakDemo.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+/// <summary>
+/// Demonstrates protected API endpoints with different authorization requirements.
+/// </summary>
 public sealed class DemoController : ControllerBase
 {
+    /// <summary>
+    /// Returns a response if the user is authenticated with a valid bearer token.
+    /// </summary>
+    /// <returns>DemoResponse with user and claim info.</returns>
     [HttpGet("protected")]
     [Authorize]
     public ActionResult<DemoResponse> Protected()
@@ -17,6 +24,10 @@ public sealed class DemoController : ControllerBase
         return Ok(BuildResponse("The authenticated endpoint accepted the bearer token."));
     }
 
+    /// <summary>
+    /// Returns a response only if the user meets the finance department policy (department=finance).
+    /// </summary>
+    /// <returns>DemoResponse with user and claim info.</returns>
     [HttpGet("claims-protected")]
     [Authorize(Policy = AuthorizationPolicies.FinanceDepartment)]
     public ActionResult<DemoResponse> ClaimsProtected()
@@ -24,6 +35,11 @@ public sealed class DemoController : ControllerBase
         return Ok(BuildResponse("The finance-only policy accepted the Keycloak department claim."));
     }
 
+    /// <summary>
+    /// Helper to build a DemoResponse from the current user claims.
+    /// </summary>
+    /// <param name="message">Message to include in the response.</param>
+    /// <returns>DemoResponse with user and claim info.</returns>
     private DemoResponse BuildResponse(string message)
     {
         return new DemoResponse(

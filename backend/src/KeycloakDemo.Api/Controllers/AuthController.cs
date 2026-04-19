@@ -9,15 +9,26 @@ namespace KeycloakDemo.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+/// <summary>
+/// Handles authentication-related endpoints for user info and diagnostics.
+/// </summary>
 public sealed class AuthController : ControllerBase
 {
     private readonly KeycloakOptions _keycloakOptions;
 
+    /// <summary>
+    /// Initializes the AuthController with Keycloak options.
+    /// </summary>
+    /// <param name="keycloakOptions">Injected Keycloak options.</param>
     public AuthController(IOptions<KeycloakOptions> keycloakOptions)
     {
         _keycloakOptions = keycloakOptions.Value;
     }
 
+    /// <summary>
+    /// Returns information about the currently authenticated user, including claims and roles.
+    /// </summary>
+    /// <returns>UserInfoResponse with claims and roles.</returns>
     [HttpGet("me")]
     [Authorize]
     public ActionResult<UserInfoResponse> Me()
@@ -36,6 +47,11 @@ public sealed class AuthController : ControllerBase
             Claims: claims));
     }
 
+    /// <summary>
+    /// Returns diagnostic information about the current authentication context and token.
+    /// Useful for debugging Keycloak integration and token validation.
+    /// </summary>
+    /// <returns>AuthDiagnosticsResponse with authority, issuer, audience, and user info.</returns>
     [HttpGet("diagnostics")]
     [Authorize]
     public ActionResult<AuthDiagnosticsResponse> Diagnostics()

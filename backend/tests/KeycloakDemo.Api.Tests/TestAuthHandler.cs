@@ -26,11 +26,12 @@ public sealed class TestAuthHandler : AuthenticationHandler<AuthenticationScheme
         }
 
         var username = usernameValues.ToString();
-        var claims = new List<Claim>
-        {
-            new(JwtClaimTypes.Subject, $"{username}-sub"),
-            new(JwtClaimTypes.PreferredUsername, username)
-        };
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Name, "TestUser"),
+                new Claim("department", "finance"),
+                new Claim("roles", "finance-admin")
+            };
 
         if (Request.Headers.TryGetValue("X-Demo-Department", out var departmentValues))
         {

@@ -1,5 +1,8 @@
 namespace KeycloakDemo.ReportingApi.Tests;
 
+/// <summary>
+/// Integration tests for reporting API authentication and authorization scenarios.
+/// </summary>
 public sealed class ReportingIntegrationTests : IClassFixture<TestWebApplicationFactory>
 {
     private readonly HttpClient _client;
@@ -9,6 +12,9 @@ public sealed class ReportingIntegrationTests : IClassFixture<TestWebApplication
         _client = factory.CreateClient();
     }
 
+    /// <summary>
+    /// Verifies that accessing the summary report without a token returns 401 Unauthorized.
+    /// </summary>
     [Fact]
     public async Task Summary_ReturnsUnauthorized_WhenRequestHasNoToken()
     {
@@ -16,6 +22,9 @@ public sealed class ReportingIntegrationTests : IClassFixture<TestWebApplication
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
 
+    /// <summary>
+    /// Verifies that an authenticated user can access the summary report.
+    /// </summary>
     [Fact]
     public async Task Summary_ReturnsOk_WhenAuthenticated()
     {
@@ -27,6 +36,9 @@ public sealed class ReportingIntegrationTests : IClassFixture<TestWebApplication
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
+    /// <summary>
+    /// Verifies that a non-finance user receives 403 Forbidden on the finance report.
+    /// </summary>
     [Fact]
     public async Task Finance_ReturnsForbidden_ForNonFinanceUsers()
     {
@@ -39,6 +51,9 @@ public sealed class ReportingIntegrationTests : IClassFixture<TestWebApplication
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
     }
 
+    /// <summary>
+    /// Verifies that a finance user can access the finance-only report.
+    /// </summary>
     [Fact]
     public async Task Finance_ReturnsOk_ForFinanceUsers()
     {

@@ -10,17 +10,24 @@ This demo uses:
 ## Development sequence
 
 1. Copy `.env.example` to `.env` at the repo root if you want to change ports or admin credentials.
-2. Start everything with a helper script:
-   - macOS/Linux: `./start-demo.sh`
-   - Windows: `powershell -ExecutionPolicy Bypass -File .\start-demo.ps1`
-3. Or start manually:
-   - `docker compose -f infra/docker-compose.yml up --build`
-   - `cd frontend`
-   - `npm install`
-   - `npm run dev`
-4. Open `http://localhost:5173`.
-5. Click the login button and complete authentication on the Keycloak-hosted page.
-6. Return to the SPA callback route, complete the code exchange, and call the demo API endpoints across both .NET services.
+
+-
+1. Start everything with a helper script:
+- macOS/Linux: `./start-demo.sh`
+- Windows: `powershell -ExecutionPolicy Bypass -File .\start-demo.ps1`
+
+-
+1. Or start manually:
+- `docker compose -f infra/docker-compose.yml up --build`
+- `cd frontend`
+- `npm install`
+- `npm run dev`
+
+1. Open `http://localhost:5173`.
+
+1. Click the login button and complete authentication on the Keycloak-hosted page.
+
+1. Return to the SPA callback route, complete the code exchange, and call the demo API endpoints across both .NET services.
 
 ## Keycloak bootstrap
 

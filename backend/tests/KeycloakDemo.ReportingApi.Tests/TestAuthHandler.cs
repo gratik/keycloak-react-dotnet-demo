@@ -25,10 +25,10 @@ public sealed class TestAuthHandler : AuthenticationHandler<AuthenticationScheme
             return Task.FromResult(AuthenticateResult.NoResult());
         }
 
-        var claims = new List<Claim>
-        {
-            new(JwtClaimTypes.PreferredUsername, usernameValues.ToString())
-        };
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Name, usernameValues.ToString())
+            };
 
         if (Request.Headers.TryGetValue("X-Demo-Department", out var departmentValues))
         {
@@ -41,4 +41,34 @@ public sealed class TestAuthHandler : AuthenticationHandler<AuthenticationScheme
 
         return Task.FromResult(AuthenticateResult.Success(ticket));
     }
+        /// <summary>
+        /// Test authentication handler that always authenticates as a test user for integration tests in the Reporting API.
+        /// </summary>
+        public const string AuthenticationScheme = "Test";
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestAuthHandler"/> class.
+        /// </summary>
+        public TestAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder)
+            : base(options, logger, encoder)
+        {
+        }
+
+        /// <summary>
+        /// Handles authentication by always returning a test user principal.
+        /// </summary>
+        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
+        {
+            // Always authenticate the user as a test user for integration testing.
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Name, "TestUser"),
+                new Claim("department", "finance"),
+                new Claim("roles", "finance-admin")
+            };
+            var identity = new ClaimsIdentity(claims, AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+            var ticket = new AuthenticationTicket(principal, AuthenticationScheme);
+            return Task.FromResult(AuthenticateResult.Success(ticket));
+        }
 }

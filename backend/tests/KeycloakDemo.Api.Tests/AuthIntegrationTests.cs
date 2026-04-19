@@ -1,5 +1,8 @@
 namespace KeycloakDemo.Api.Tests;
 
+/// <summary>
+/// Integration tests for API authentication and authorization scenarios.
+/// </summary>
 public sealed class AuthIntegrationTests : IClassFixture<TestWebApplicationFactory>
 {
     private readonly HttpClient _client;
@@ -9,6 +12,9 @@ public sealed class AuthIntegrationTests : IClassFixture<TestWebApplicationFacto
         _client = factory.CreateClient();
     }
 
+    /// <summary>
+    /// Verifies that accessing a protected endpoint without a token returns 401 Unauthorized.
+    /// </summary>
     [Fact]
     public async Task Protected_ReturnsUnauthorized_WhenRequestHasNoToken()
     {
@@ -16,6 +22,9 @@ public sealed class AuthIntegrationTests : IClassFixture<TestWebApplicationFacto
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
 
+    /// <summary>
+    /// Verifies that an authenticated user can access the protected endpoint.
+    /// </summary>
     [Fact]
     public async Task Protected_ReturnsOk_WhenAuthenticated()
     {
@@ -27,6 +36,9 @@ public sealed class AuthIntegrationTests : IClassFixture<TestWebApplicationFacto
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
+    /// <summary>
+    /// Verifies that an authenticated user can access the diagnostics endpoint.
+    /// </summary>
     [Fact]
     public async Task Diagnostics_ReturnsOk_WhenAuthenticated()
     {
@@ -38,6 +50,9 @@ public sealed class AuthIntegrationTests : IClassFixture<TestWebApplicationFacto
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
+    /// <summary>
+    /// Verifies that a user without the required department claim receives 403 Forbidden.
+    /// </summary>
     [Fact]
     public async Task ClaimsProtected_ReturnsForbidden_WhenDepartmentClaimIsMissing()
     {
@@ -50,6 +65,9 @@ public sealed class AuthIntegrationTests : IClassFixture<TestWebApplicationFacto
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
     }
 
+    /// <summary>
+    /// Verifies that a user with the correct department claim can access the finance-protected endpoint.
+    /// </summary>
     [Fact]
     public async Task ClaimsProtected_ReturnsOk_WhenDepartmentClaimMatchesPolicy()
     {

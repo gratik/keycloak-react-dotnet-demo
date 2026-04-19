@@ -66,3 +66,4 @@ Detailed setup steps are documented in `docs/setup.md`, and the architecture rat
 - `docs/dotnet-api-keycloak-integration.md`: how to secure any ASP.NET Core API with Keycloak-issued tokens
 - `docs/keycloak-setup-guide.md`: how to configure Keycloak realms, clients, scopes, claims, and users
 - `docs/authentication-authorization-flow.md`: full end-to-end explanation of the login, token, validation, and authorization flow used by this demo
+- `docs/glossary.md`: quick definitions for common auth, token, OIDC, and Keycloak terms

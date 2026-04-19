@@ -17,7 +17,15 @@ builder.Services.AddCors(options =>
         name: CorsPolicies.Frontend,
         policy =>
         {
-            var origins = builder.Configuration
+/// <summary>
+/// Entry point for the KeycloakDemo.Api application.
+/// Configures services, authentication, and the HTTP request pipeline.
+/// </summary>
+/// <remarks>
+/// This file sets up the ASP.NET Core web application, registers controllers, Swagger, and Keycloak authentication.
+/// </remarks>
+var builder = WebApplication.CreateBuilder(args);
+
                 .GetSection("Cors:AllowedOrigins")
                 .Get<string[]>() ?? ["http://localhost:5173"];
 

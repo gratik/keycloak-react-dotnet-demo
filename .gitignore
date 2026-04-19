@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.DS_Store
+bin/
+obj/
+.idea/
+.vscode/
+.env
+frontend/.env.local
+backend/src/KeycloakDemo.Api/appsettings.Development.local.json
+.run/

@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/api.ts","./src/env.d.ts","./src/main.tsx","./src/auth/config.ts","./src/auth/oidc.ts","./src/auth/pkce.ts"],"version":"5.9.3"}

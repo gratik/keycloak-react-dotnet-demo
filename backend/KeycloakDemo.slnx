@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/KeycloakDemo.Api/KeycloakDemo.Api.csproj" />
+    <Project Path="src/KeycloakDemo.ReportingApi/KeycloakDemo.ReportingApi.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/KeycloakDemo.Api.Tests/KeycloakDemo.Api.Tests.csproj" />
+    <Project Path="tests/KeycloakDemo.ReportingApi.Tests/KeycloakDemo.ReportingApi.Tests.csproj" />
+  </Folder>
+</Solution>

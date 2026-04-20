@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
 /// This file sets up the ASP.NET Core web application, registers controllers, Swagger, and Keycloak authentication.
 /// </remarks>
 var builder = WebApplication.CreateBuilder(args);
-
+ var origins = builder.Configuration
                 .GetSection("Cors:AllowedOrigins")
                 .Get<string[]>() ?? ["http://localhost:5173"];
 
